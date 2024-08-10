@@ -3,73 +3,196 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galeri Foto</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Selamat Datang di Galeri KisahKami</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #ffcccc 30%, #ffe6e6 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .alert {
+            position: relative;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            animation: slideIn 1s forwards;
+            backdrop-filter: blur(10px);
+        }
+
+        .alert h1 {
+            margin: 0;
+            font-size: 28px;
+            color: #d63384;
+            font-weight: 700;
+        }
+
+        .alert p {
+            color: #555;
+            font-size: 20px;
+            margin: 15px 0;
+        }
+
+        .button {
+            background-color: #d63384;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 12px 25px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s;
+            font-weight: bold;
+            opacity: 0; /* Sembunyikan tombol awal */
+        }
+
+        .button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 20px rgba(214, 51, 132, 0.5);
+            background-color: #c51f6d;
+        }
+
+        .countdown {
+            font-size: 24px;
+            color: #d63384;
+            margin-top: 20px;
+            animation: fadeIn 1s;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .pulse {
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 10px rgba(214, 51, 132, 0.7);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(214, 51, 132, 1);
+            }
+        }
+
+        .glow {
+            animation: glow 1.5s infinite alternate;
+        }
+
+        .countdown-row {
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* Jarak antar elemen */
+        }
+
+        .countdown-label {
+            font-size: 18px;
+            color: #555;
+        }
+    </style>
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#galeri">Galeri</a></li>
-            <li><a href="#favorit">Favorit</a></li>
-            <li><a href="#upload">Upload</a></li>
-        </ul>
-    </nav>
 
-    <div id="home" class="content">
-        <h1>Kisah Kami</h1>
-        <p>Kisah kami berawal dari kebersamaan dan kenangan indah yang ingin kami abadikan. Melalui galeri ini, kami berharap dapat berbagi momen berharga dengan kalian semua.</p>
-    </div>
+<div class="alert glow">
+    <h1>Selamat Datang di Galeri KisahKami</h1>
+    <p id="message">Saat ini hitung mundur sedang berjalan</p>
+    <div class="countdown"></div>
+    <button class="button" id="yesButton" onclick="redirectToPublic()">Ya</button>
+</div>
 
-    <div id="galeri" class="content hidden">
-        <h2>Galeri</h2>
-        <div id="photoGallery" class="gallery"></div>
-    </div>
+<script>
+    const countdownDisplay = document.querySelector('.countdown');
+    const yesButton = document.getElementById('yesButton');
+    const message = document.getElementById('message');
 
-    <div id="favorit" class="content hidden">
-        <h2>Foto Favorit</h2>
-        <div id="favoriteGallery" class="gallery"></div>
-    </div>
+    // Tanggal target untuk hitung mundur (26 Agustus 2024)
+    const targetDate = new Date(2024, 7, 26, 0, 0, 0); // Bulan 7 adalah Agustus (indeks mulai dari 0)
 
-    <div id="upload" class="content">
-        <h2>Unggah Foto</h2>
-        <input type="file" id="fileInput">
-        <input type="text" id="description" placeholder="Deskripsi">
-        <input type="date" id="date">
-        <button id="uploadButton">Unggah</button>
-        
-        <h3>Hapus Foto</h3>
-        <div id="deleteGallery" class="gallery"></div>
-        <div id="trash" class="trash">&#128465;</div>
-    </div>
-    
+    // Cek apakah hitung mundur sudah selesai
+    if (localStorage.getItem('countdownFinished')) {
+        // Jika sudah selesai, tampilkan pesan dan tombol
+        countdownDisplay.textContent = "YEAY AKSES TELAH TERBUKA!";
+        message.textContent = "TEKAN YA UNTUK LANJUT";
+        yesButton.style.opacity = 1; // Menampilkan tombol
+        yesButton.classList.add('pulse'); // Menambahkan efek pulse pada tombol
+        yesButton.disabled = false; // Mengaktifkan tombol
+    } else {
+        // Jika belum selesai, mulai hitung mundur
+        const countdownInterval = setInterval(() => {
+            const now = new Date();
+            const distance = targetDate - now;
 
-    <div id="imageModal" class="modal">
-        <span class="close">&times;</span>
-        <div class="modal-content">
-            <img id="modalImage" class="modal-image" src="" alt="Gambar">
-            <div class="caption" id="caption"></div> <!-- Deskripsi di sini -->
-        </div>
-    </div>    
+            // Hitung waktu tersisa
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    <div id="securityModal" class="modal">
-        <div class="modal-content">
-            <span class="close" id="modalClose">&times;</span>
-            <h2>Masukkan Kode Keamanan</h2>
-            <input type="text" id="securityCodeInput" placeholder="Masukkan kode keamanan" />
-            <button id="submitCodeButton">Kirim</button>
-            <div id="attemptMessage" style="color: red; margin-top: 10px;"></div>
-        </div>
-    </div>
-    
-    <div id="customAlert" class="custom-alert">
-        <div class="alert-content">
-            <span class="close-alert">&times;</span>
-            <div id="alertMessage"></div>
-        </div>
-    </div>
-       
+            // Tampilkan hitung mundur
+            countdownDisplay.innerHTML = `
+                <div class="countdown-row">
+                    <div>${days} <span class="countdown-label">SISA HARI</span></div>
+                    <div>${hours} <span class="countdown-label">JAM</span></div>
+                    <div>${minutes} <span class="countdown-label">MENIT</span></div>
+                    <div>${seconds} <span class="countdown-label">DETIK</span></div>
+                </div>
+            `;
 
-    <script src="script.js"></script>
+            // Jika hitung mundur selesai
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                countdownDisplay.innerHTML = "YEAY AKSES TELAH TERBUKA!";
+                message.textContent = "TEKAN YA UNTUK LANJUT";
+                yesButton.style.opacity = 1; // Menampilkan tombol setelah hitung mundur selesai
+                yesButton.classList.add('pulse'); // Menambahkan efek pulse pada tombol
+                yesButton.disabled = false; // Mengaktifkan tombol
+                localStorage.setItem('countdownFinished', 'true'); // Menyimpan status selesai
+            }
+        }, 1000);
+
+        // Menginisialisasi tombol
+        yesButton.style.opacity = 0; // Sembunyikan tombol saat halaman dimuat
+        yesButton.disabled = true; // Nonaktifkan tombol saat halaman dimuat
+    }
+
+    function redirectToPublic() {
+        window.location.href = 'public/index.html'; // Ganti dengan path yang sesuai jika berbeda
+    }
+</script>
+
 </body>
 </html>

@@ -1,0 +1,532 @@
+/* Reset dan Gaya Dasar */
+/* Reset dan Gaya Dasar */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fdf9f9; /* Latar belakang lembut */
+    color: #333;
+    transition: background-color 0.5s ease; /* Animasi transisi warna latar belakang */
+}
+
+nav {
+    background-color: #d7bde2; /* Warna ungu muda yang lembut */
+    color: #333;
+    padding: 15px 30px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center; /* Memusatkan konten di dalam navbar */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Bayangan lebih lembut */
+    animation: slideDown 0.5s ease; /* Animasi saat navbar muncul */
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%); /* Mulai dari atas */
+    }
+    to {
+        transform: translateY(0); /* Kembali ke posisi normal */
+    }
+}
+
+nav:hover {
+    background-color: #e1bee7; /* Ubah warna saat hover pada navbar */
+    transition: background-color 0.3s ease; /* Transisi warna latar belakang */
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap; /* Membungkus item pada perangkat kecil */
+}
+
+nav ul li {
+    margin: 0 20px; /* Memberikan jarak antar item navbar */
+}
+
+nav ul li a {
+    color: #333;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 25px; /* Membuat sudut melengkung */
+    font-weight: bold; /* Menebalkan teks */
+    position: relative; /* Untuk efek bawah */
+    overflow: hidden; /* Sembunyikan efek di luar batas */
+    transition: color 0.3s, transform 0.3s; /* Transisi warna dan transformasi */
+}
+
+nav ul li a:hover {
+    color: #e91e63; /* Ubah warna saat hover */
+    transform: scale(1.1) rotate(2deg); /* Efek zoom dan rotasi saat hover */
+    text-shadow: 0 0 5px rgba(233, 30, 99, 0.5); /* Efek bayangan teks */
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background: #e91e63; /* Garis bawah saat hover */
+    left: 0;
+    bottom: -5px; /* Jarak dari teks */
+    transform: scaleX(0);
+    transition: transform 0.3s ease-in-out;
+}
+
+nav ul li a:hover::after {
+    transform: scaleX(1);
+}
+
+/* Konten */
+.content {
+    display: none;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 15px; /* Sudut melengkung */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1); /* Bayangan lebih lembut */
+    margin: 20px;
+    animation: fadeIn 0.5s ease-in-out; /* Animasi muncul */
+}
+
+.content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+h1, h2 {
+    color: #444;
+    margin-bottom: 10px;
+    text-align: center; /* Pusatkan judul */
+    animation: bounceIn 0.5s ease; /* Animasi judul */
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: scale(0); /* Mulai dari ukuran 0 */
+    }
+    60% {
+        transform: scale(1.1); /* Memperbesar sedikit */
+    }
+    100% {
+        transform: scale(1); /* Kembali ke ukuran normal */
+    }
+}
+
+p {
+    font-size: 1.2em;
+    line-height: 1.8;
+    text-align: justify; /* Rata kiri dan kanan */
+    margin: 15px 0; /* Jarak vertikal */
+    transition: color 0.3s ease; /* Animasi transisi warna teks */
+}
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap; /* Mengizinkan gambar untuk membungkus ke baris berikutnya */
+    gap: 15px; /* Jarak antara gambar */
+    justify-content: center; /* Pusatkan gambar */
+    animation: fadeIn 0.5s ease-in-out; /* Animasi galeri muncul */
+}
+
+.photo-card {
+    position: relative; /* Menjaga posisi relatif untuk ikon favorit */
+    flex: 1 1 calc(25% - 15px); /* Empat kolom, dengan jarak antar kolom */
+    box-sizing: border-box; /* Pastikan padding dan border dimasukkan dalam ukuran elemen */
+    border: 1px solid #ddd;
+    border-radius: 15px; /* Sudut melengkung */
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s; /* Transisi saat hover */
+}
+
+.photo-card:hover {
+    transform: translateY(-5px); /* Efek mengangkat saat hover */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); /* Bayangan saat hover */
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05); /* Memperbesar saat di tengah */
+    }
+}
+
+.photo-card img {
+    width: 100%; /* Gambar mengisi lebar elemen */
+    height: auto; /* Menjaga rasio aspek */
+    display: block; /* Menghindari ruang ekstra di bawah gambar */
+    transition: transform 0.3s ease, filter 0.3s ease; /* Transisi saat hover */
+}
+
+.photo-card img:hover {
+    transform: scale(1.1) rotate(2deg); /* Efek zoom dan rotasi pada gambar */
+    filter: brightness(1.1); /* Mencerahkan gambar saat hover */
+}
+
+.photo-card .description {
+    padding: 15px;
+    background-color: #fff;
+    text-align: center; /* Pusatkan teks deskripsi */
+    border-radius: 0 0 15px 15px; /* Sudut melengkung bawah */
+    display: block; /* Pastikan menjadi elemen blok */
+    word-wrap: break-word; /* Memungkinkan pemotongan kata */
+    max-width: 100%; /* Batas lebar maksimum */
+    transition: background-color 0.3s, transform 0.3s; /* Transisi warna latar belakang */
+}
+
+.photo-card .description:hover {
+    background-color: #f8bbd0; /* Ubah warna latar belakang saat hover */
+    transform: translateY(-5px); /* Efek mengangkat saat hover */
+}
+
+.photo-card .date {
+    padding: 5px;
+    color: #888;
+    text-align: center; /* Pusatkan teks tanggal */
+    display: block; /* Pastikan menjadi elemen blok */
+    transition: color 0.3s; /* Transisi warna teks */
+}
+
+.photo-card .date:hover {
+    color: #e91e63; /* Ubah warna saat hover */
+}
+
+.favorite {
+    position: absolute; /* Memastikan posisi tetap */
+    top: 10px; /* Atur posisi dari atas */
+    right: 10px; /* Atur posisi dari kanan */
+    font-size: 24px;
+    cursor: pointer;
+    color: #888; /* Warna hati default */
+    transition: color 0.3s, transform 0.3s; /* Tambahkan transisi */
+}
+
+.favorite:hover {
+    transform: scale(1.5) rotate(360deg); /* Efek zoom dan rotasi saat hover */
+}
+
+.favorite.liked {
+    color: #e91e63; /* Warna hati saat favorit */
+}
+
+
+.modal {
+    display: none; /* Sembunyikan modal secara default */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4); /* Latar belakang gelap */
+    animation: fadeIn 0.5s; /* Animasi muncul */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px; /* Lebar modal */
+    border-radius: 10px; /* Sudut melengkung */
+    text-align: center;
+}
+
+.modal-image {
+    max-width: 100%; /* Gambar tidak lebih lebar dari modal */
+    height: auto; /* Mempertahankan rasio aspek */
+    transition: transform 0.3s ease; /* Transisi saat hover gambar modal */
+}
+
+.modal-image:hover {
+    transform: scale(1.1); /* Efek zoom pada gambar modal */
+}
+
+.caption {
+    text-align: center;
+    color: white; /* Ubah warna deskripsi menjadi putih */
+    margin-top: 10px; /* Jarak antara gambar dan deskripsi */
+    width: auto; /* Sesuaikan lebar dengan konten */
+    word-wrap: break-word; /* Memungkinkan pemotongan kata */
+    animation: fadeIn 0.5s ease-in-out; /* Animasi deskripsi muncul */
+}
+
+/* Tanda X */
+.photo-card .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    color: red; /* Warna merah untuk tanda X */
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.8); /* Latar belakang putih semi-transparan */
+    padding: 5px;
+    border-radius: 50%; /* Bentuk bulat */
+    display: none; /* Sembunyikan secara default */
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.photo-card.selected .close-btn {
+    display: block; /* Tampilkan tanda X saat foto dipilih */
+    transform: scale(1); /* Efek muncul */
+    opacity: 1; /* Tampilan penuh */
+}
+
+.photo-card .close-btn:hover {
+    transform: scale(1.2); /* Perbesar tanda X saat di-hover */
+}
+
+
+@keyframes flash {
+    0%, 100% {
+        opacity: 0.9;
+    }
+    50% {
+        opacity: 1; /* Muncul lebih terang */
+    }
+}
+
+.close {
+    color: #aaa;
+    float: right; /* Letakkan tombol close di kanan */
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: black; /* Ubah warna saat hover */
+}
+
+.close:focus {
+    color: red;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#submitCodeButton {
+    background-color: #4CAF50; /* Warna tombol */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#submitCodeButton:hover {
+    background-color: #45a049; /* Warna saat hover */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.photo-card.selected {
+    border: 2px dashed #e91e63; /* Garis putus-putus saat foto dipilih */
+}
+
+.trash {
+    font-size: 48px;
+    text-align: center;
+    color: #aaa; /* Warna abu-abu awal */
+    cursor: pointer;
+    display: none; /* Sembunyikan tempat sampah awalnya */
+    margin-top: 20px;
+    transition: color 0.3s;
+}
+
+.trash.active {
+    display: block; /* Tampilkan tempat sampah jika aktif */
+}
+
+.trash:hover {
+    color: red; /* Ubah warna saat hover */
+}
+
+.trash.red {
+    color: red; /* Warna merah saat tempat sampah ditekan */
+}
+
+.fade-out {
+    transition: opacity 0.5s ease;
+    opacity: 0; /* Menghilangkan gambar */
+}
+
+
+/* Custom Alert Modal */
+.custom-alert {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.5s;
+}
+
+#customAlert.show {
+    display: block;
+    animation: fadeInScale 0.5s ease-in-out, blink 1.5s infinite;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.alert {
+    display: none; /* Sembunyikan alert secara default */
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Pusatkan posisi */
+    padding: 20px;
+    background-color: #ffcccb; /* Latar belakang merah muda */
+    border: 2px solid #f44336; /* Garis batas berwarna merah */
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Bayangan lembut */
+    animation: flash 1s infinite; /* Efek berkedip */
+    z-index: 9999; /* Di atas elemen lain */
+}
+
+.alert-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    position: relative;
+    animation: slideIn 0.5s, blink 1s infinite; /* Tambahkan efek blink */
+}
+
+.alert-content.success {
+    border-left: 5px solid green;
+}
+
+.alert-content.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.modal-content .caption {
+    color: black; /* Ubah warna teks deskripsi menjadi hitam */
+    font-size: 16px; /* Sesuaikan ukuran font jika diperlukan */
+    margin-top: 10px; /* Tambahkan jarak di atas */
+}
+
+
+.alert-content.error {
+    border-left: 5px solid red;
+}
+
+.close-alert {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.close-alert:hover {
+    color: #555;
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideOut {
+    0% {
+        transform: translate(-50%, -50%); /* Tetap di tengah */
+        opacity: 1; /* Mulai terlihat */
+    }
+    100% {
+        transform: translate(-50%, -60%); /* Pergi ke atas sedikit */
+        opacity: 0; /* Menjadi transparan */
+    }
+}
+
+.custom-alert.fade-out {
+    animation: slideOut 0.5s ease-in-out forwards; /* Animasi saat menghilang */
+}
+
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.05); /* Ukuran sedikit lebih besar */
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* Responsivitas */
+@media (max-width: 1200px) {
+    .photo-card {
+        flex: 1 1 calc(33.33% - 15px); /* 3 kolom untuk layar sedang */
+    }
+}
+
+@media (max-width: 768px) {
+    .photo-card {
+        flex: 1 1 calc(50% - 15px); /* 2 kolom pada layar lebih kecil */
+    }
+
+    nav ul {
+        flex-direction: column; /* Mengubah navbar menjadi vertikal */
+        align-items: center; /* Memusatkan item navbar */
+    }
+
+    nav ul li {
+        margin: 10px 0; /* Jarak antar item navbar vertikal */
+    }
+}
+
+@media (max-width: 480px) {
+    .photo-card {
+        flex: 1 1 100%; /* 1 kolom pada layar kecil */
+    }
+
+    h1, h2 {
+        font-size: 1.5em; /* Ukuran teks lebih kecil pada layar kecil */
+    }
+
+    p {
+        font-size: 1em; /* Ukuran teks lebih kecil pada layar kecil */
+    }
+
+    .modal-content {
+        width: 90%; /* Lebar modal lebih lebar pada layar kecil */
+    }
+}
