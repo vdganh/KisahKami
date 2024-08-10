@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeri Foto</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#galeri">Galeri</a></li>
+            <li><a href="#favorit">Favorit</a></li>
+            <li><a href="#upload">Upload</a></li>
+        </ul>
+    </nav>
+
+    <div id="home" class="content">
+        <h1>Kisah Kami</h1>
+        <p>Kisah kami berawal dari kebersamaan dan kenangan indah yang ingin kami abadikan. Melalui galeri ini, kami berharap dapat berbagi momen berharga dengan kalian semua.</p>
+    </div>
+
+    <div id="galeri" class="content hidden">
+        <h2>Galeri</h2>
+        <div id="photoGallery" class="gallery"></div>
+    </div>
+
+    <div id="favorit" class="content hidden">
+        <h2>Foto Favorit</h2>
+        <div id="favoriteGallery" class="gallery"></div>
+    </div>
+
+    <div id="upload" class="content">
+        <h2>Unggah Foto</h2>
+        <input type="file" id="fileInput">
+        <input type="text" id="description" placeholder="Deskripsi">
+        <input type="date" id="date">
+        <button id="uploadButton">Unggah</button>
+        
+        <h3>Hapus Foto</h3>
+        <div id="deleteGallery" class="gallery"></div>
+        <div id="trash" class="trash">&#128465;</div>
+    </div>
+    
+
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <div class="modal-content">
+            <img id="modalImage" class="modal-image" src="" alt="Gambar">
+            <div class="caption" id="caption"></div> <!-- Deskripsi di sini -->
+        </div>
+    </div>    
+
+    <div id="securityModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="modalClose">&times;</span>
+            <h2>Masukkan Kode Keamanan</h2>
+            <input type="text" id="securityCodeInput" placeholder="Masukkan kode keamanan" />
+            <button id="submitCodeButton">Kirim</button>
+            <div id="attemptMessage" style="color: red; margin-top: 10px;"></div>
+        </div>
+    </div>
+    
+    <div id="customAlert" class="custom-alert">
+        <div class="alert-content">
+            <span class="close-alert">&times;</span>
+            <div id="alertMessage"></div>
+        </div>
+    </div>
+       
+
+    <script src="script.js"></script>
+</body>
+</html>
