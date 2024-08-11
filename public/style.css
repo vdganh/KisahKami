@@ -130,11 +130,12 @@ p {
 
 .gallery {
     display: flex;
-    flex-wrap: wrap; /* Mengizinkan gambar untuk membungkus ke baris berikutnya */
-    gap: 15px; /* Jarak antara gambar */
-    justify-content: center; /* Pusatkan gambar */
-    animation: fadeIn 0.5s ease-in-out; /* Animasi galeri muncul */
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start; /* Menghindari foto tidak sejajar */
+    gap: 15px;
 }
+
 
 .photo-card {
     position: relative; /* Menjaga posisi relatif untuk ikon favorit */
@@ -162,11 +163,12 @@ p {
 }
 
 .photo-card img {
-    width: 100%; /* Gambar mengisi lebar elemen */
-    height: auto; /* Menjaga rasio aspek */
-    display: block; /* Menghindari ruang ekstra di bawah gambar */
-    transition: transform 0.3s ease, filter 0.3s ease; /* Transisi saat hover */
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    background-color: #fdf9f9; /* Sama dengan latar belakang */
 }
+
 
 .photo-card img:hover {
     transform: scale(1.1) rotate(2deg); /* Efek zoom dan rotasi pada gambar */

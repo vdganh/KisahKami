@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function loadDeleteGallery() {
         deleteGallery.innerHTML = '';
-        for (let i = 1; i <= 24; i++) {
+        for (let i = 1; i <= 35; i++) {
             const imgSrc = `uploads/foto${i}.jpg`;
             const photoCard = document.createElement('div');
             photoCard.classList.add('photo-card');
@@ -267,35 +267,44 @@ document.addEventListener('DOMContentLoaded', () => {
     function loadFromUploads() {
         photoGallery.innerHTML = ''; // Clear existing gallery
         const photos = []; // Array to store image paths
-
-        for (let i = 1; i <= 24; i++) {
+    
+        for (let i = 1; i <= 35; i++) {
             photos.push(`uploads/foto${i}.jpg`); // Store image paths in an array
         }
-
+    
+        let photoCount = 0; // Counter for loaded photos
+    
         // Load images and add them to the gallery
         photos.forEach((imgSrc, index) => {
             const img = new Image();
             img.src = imgSrc;
-
+    
             img.onload = function () {
                 const description = `KENANGAN SELAMA 1 TAHUN KAMI ${index + 1}`; // Adjust description as desired
                 const date = `DIBUAT 26 AGUSTUS 2024`; // Change to the appropriate date
                 const photoCard = createPhotoCard(imgSrc, description, date);
                 photoGallery.appendChild(photoCard);
+                photoCount++;
+    
+                if (photoCount === 35) {
+                    console.log('Semua 35 foto telah dimuat.');
+                    showAlert('Semua 35 foto telah berhasil dimuat.', 'success');
+                }
             };
-
+    
             img.onerror = function () {
                 console.error(`Gagal memuat gambar: ${imgSrc}`);
             };
         });
     }
+    
 
     function loadFromLocalStorage() {
         photoGallery.innerHTML = '';
         const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
         // Load all photos into the gallery
-        for (let i = 1; i <= 24; i++) {
+        for (let i = 1; i <= 35; i++) {
             const imgSrc = `uploads/foto${i}.jpg`;
             const description = `Deskripsi untuk foto ${i}`; // Adjust with desired description
             const date = `2024-08-10`; // Change to the appropriate date
