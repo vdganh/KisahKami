@@ -7,123 +7,255 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #ffcccc 30%, #ffe6e6 100%);
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(circle at center, #ffe6e6, #ffcccc);
+            background-size: 500% 500%;
+            animation: smoothBackground 20s infinite alternate, subtleGlow 15s infinite alternate ease-in-out;
+            margin: 0;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
             overflow: hidden;
         }
-
+    
+        @keyframes smoothBackground {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
+        }
+    
+        @keyframes subtleGlow {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.2); }
+        }
+    
         .alert {
             position: relative;
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            animation: slideIn 1s forwards;
-            backdrop-filter: blur(10px);
-        }
-
-        .alert h1 {
-            margin: 0;
-            font-size: 28px;
-            color: #d63384;
-            font-weight: 700;
-        }
-
-        .alert p {
-            color: #555;
-            font-size: 20px;
-            margin: 15px 0;
-        }
-
-        .button {
-            background-color: #d63384;
-            color: white;
-            border: none;
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 25px;
-            padding: 12px 25px;
-            font-size: 18px;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s;
-            font-weight: bold;
-            opacity: 0; /* Sembunyikan tombol awal */
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+            text-align: center;
+            animation: fadeInSlideUp 2.2s forwards ease-in-out, gentleShake 7s infinite alternate ease-in-out;
+            backdrop-filter: blur(15px);
+            max-width: 80%;
+            transform: translateY(150px) scale(0.9);
+            opacity: 0;
+            transition: transform 0.5s ease-in-out;
         }
-
-        .button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 4px 20px rgba(214, 51, 132, 0.5);
-            background-color: #c51f6d;
+    
+        @keyframes gentleShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(2px); }
+            50% { transform: translateX(0); }
+            75% { transform: translateX(-2px); }
         }
-
-        .countdown {
-            font-size: 24px;
-            color: #d63384;
-            margin-top: 20px;
-            animation: fadeIn 1s;
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateY(-100%);
+    
+        @keyframes fadeInSlideUp {
+            0% {
+                transform: translateY(150px) scale(0.9);
                 opacity: 0;
             }
-            to {
+            100% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+    
+        .alert h1 {
+            margin: 0;
+            font-size: 38px;
+            color: #d63384;
+            font-weight: 700;
+            animation: textGlow 3.5s infinite alternate ease-in-out, colorCycle 4.5s infinite alternate ease-in-out;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.5s ease-in-out;
+        }
+    
+        @keyframes textGlow {
+            0% { text-shadow: 0 0 15px rgba(214, 51, 132, 0.7); }
+            100% { text-shadow: 0 0 30px rgba(214, 51, 132, 1); }
+        }
+    
+        @keyframes colorCycle {
+            0% { color: #d63384; }
+            50% { color: #ff5a5a; }
+            100% { color: #d63384; }
+        }
+    
+        .alert p {
+            color: #555;
+            font-size: 26px;
+            margin: 25px 0;
+            animation: fadeIn 2s ease-in-out, float 3.5s infinite ease-in-out, textTransition 5s infinite alternate ease-in-out;
+            transition: color 0.4s ease-in-out;
+        }
+    
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+    
+        @keyframes textTransition {
+            0% { color: #555; }
+            50% { color: #333; }
+            100% { color: #555; }
+        }
+    
+        .button {
+            background: linear-gradient(145deg, #d63384, #ff4d4d);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 20px 50px;
+            font-size: 22px;
+            cursor: pointer;
+            transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out, background 0.5s ease-in-out, filter 0.4s ease-in-out;
+            font-weight: bold;
+            opacity: 0;
+            transform: scale(0.8);
+            animation: fadeIn 2s forwards, scaleIn 2s forwards ease-in-out, buttonGlow 7s infinite alternate ease-in-out;
+        }
+    
+        @keyframes scaleIn {
+            0% { transform: scale(0.8); }
+            100% { transform: scale(1); }
+        }
+    
+        @keyframes buttonGlow {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.4); }
+        }
+    
+        .button:hover {
+            transform: scale(1.15) rotate(-3deg);
+            box-shadow: 0 12px 30px rgba(214, 51, 132, 0.5);
+            background: linear-gradient(145deg, #c51f6d, #ff3333);
+            animation: gentleShakeHover 0.8s ease-in-out;
+            filter: brightness(1.2);
+        }
+    
+        @keyframes gentleShakeHover {
+            0%, 100% { transform: translate(0); }
+            25% { transform: translate(-3px, 0); }
+            50% { transform: translate(3px, 0); }
+            75% { transform: translate(-3px, 0); }
+        }
+    
+        .countdown {
+            font-size: 32px;
+            color: #d63384;
+            margin-top: 30px;
+            animation: fadeInUp 2.5s forwards ease-in-out;
+            transition: color 0.5s ease-in-out;
+        }
+    
+        @keyframes fadeInUp {
+            0% {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            100% {
                 transform: translateY(0);
                 opacity: 1;
             }
         }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.1);
-            }
-        }
-
-        .pulse {
-            animation: pulse 1s infinite;
-        }
-
-        @keyframes glow {
-            0%, 100% {
-                box-shadow: 0 0 10px rgba(214, 51, 132, 0.7);
-            }
-            50% {
-                box-shadow: 0 0 20px rgba(214, 51, 132, 1);
-            }
-        }
-
-        .glow {
-            animation: glow 1.5s infinite alternate;
-        }
-
+    
         .countdown-row {
             display: flex;
             justify-content: center;
-            gap: 20px; /* Jarak antar elemen */
+            gap: 40px;
+            flex-wrap: wrap;
+            animation: fadeIn 2.5s forwards ease-in-out, pulseRow 3s infinite alternate ease-in-out;
         }
-
+    
+        .countdown-row div {
+            background: #ffe6e6;
+            padding: 25px;
+            border-radius: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            animation: pulseRow 3s infinite alternate ease-in-out;
+            transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+        }
+    
+        @keyframes pulseRow {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+    
         .countdown-label {
-            font-size: 18px;
-            color: #555;
+            font-size: 24px;
+            color: #444;
+            display: block;
+            margin-top: 12px;
+            animation: fadeIn 2s ease-in-out;
         }
-    </style>
+    
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .alert {
+                padding: 35px;
+            }
+    
+            .alert h1 {
+                font-size: 32px;
+            }
+    
+            .alert p {
+                font-size: 22px;
+            }
+    
+            .button {
+                font-size: 20px;
+                padding: 18px 45px;
+            }
+    
+            .countdown {
+                font-size: 28px;
+            }
+    
+            .countdown-row div {
+                padding: 20px;
+            }
+    
+            .countdown-label {
+                font-size: 22px;
+            }
+        }
+    
+        @media (max-width: 480px) {
+            .alert {
+                padding: 25px;
+            }
+    
+            .alert h1 {
+                font-size: 28px;
+            }
+    
+            .alert p {
+                font-size: 18px;
+            }
+    
+            .button {
+                font-size: 16px;
+                padding: 15px 35px;
+            }
+    
+            .countdown {
+                font-size: 24px;
+            }
+    
+            .countdown-row div {
+                padding: 15px;
+            }
+    
+            .countdown-label {
+                font-size: 18px;
+            }
+        }
+    </style>    
+    
 </head>
 <body>
 
